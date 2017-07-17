@@ -1,4 +1,4 @@
-# Microservices Turial: Eventsourcing Sample with Apache Kafka
+# Microservices Tutorial: Eventsourcing Sample with Apache Kafka
 
 This project contains 3 maven projects for a [Microservices tutorial on Youtube(German)](https://www.youtube.com/watch?v=QjJqc5ALpKs).
 
