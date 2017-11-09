@@ -54,8 +54,6 @@ public class KafkaListenerRunner implements Runnable {
 
         JsonParser parser = new JsonParser();
 
-        Long startZeit = System.currentTimeMillis();
-
         try {
 
             System.out.println("Starting Listener!");
@@ -69,24 +67,11 @@ public class KafkaListenerRunner implements Runnable {
 
                 for (ConsumerRecord<String, String> cr : records) {
 
-                    if (cr.key().startsWith("ENDE")) {
-                        System.out.println("Zeit für 1.000.000 Nachrichten: " + ((System.currentTimeMillis() - startZeit)/1000.0) + " Sekunden.");
-                        continue;
-                    }
-
                     JsonObject json = parser.parse(cr.value()).getAsJsonObject();
 
                     String action = json.getAsJsonPrimitive("action").getAsString();
 
                     JsonObject object = json.getAsJsonObject("object");
-
-
-                    // Für Performance-Test auskommentieren!
-//                    System.out.println("----------------------------------------------------------------------------------");
-//                    System.out.println("Offset: " + cr.offset());
-//                    System.out.println("Key: "+ cr.key());
-//                    System.out.println("Action: " + action);
-//                    System.out.println("Object: " + object);
 
                     Article article = gson.fromJson(object, Article.class);
 

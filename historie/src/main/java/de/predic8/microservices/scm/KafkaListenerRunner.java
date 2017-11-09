@@ -36,7 +36,7 @@ public class KafkaListenerRunner implements Runnable {
 
         Map<String, Object> props = new HashMap<>();
         props.put(BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
-        props.put(GROUP_ID_CONFIG, "historie");
+        props.put(GROUP_ID_CONFIG, "historie-4");
         props.put(ENABLE_AUTO_COMMIT_CONFIG, "true");
         props.put(AUTO_COMMIT_INTERVAL_MS_CONFIG, "1000");
         props.put(SESSION_TIMEOUT_MS_CONFIG, "30000");
@@ -63,7 +63,14 @@ public class KafkaListenerRunner implements Runnable {
                 if (records.isEmpty())
                     continue;
 
+
+
                 for (ConsumerRecord<String, String> cr : records) {
+
+
+                    //
+
+                    //  @Consumer(topic="articles")
 
                     JsonObject json = parser.parse(cr.value()).getAsJsonObject();
 

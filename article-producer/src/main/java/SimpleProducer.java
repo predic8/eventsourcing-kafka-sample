@@ -32,10 +32,10 @@ public class SimpleProducer {
         long t1 = System.currentTimeMillis();
 
         int i = 0;
-        for (; i < 1000000; i++) {
+        for (; i < 10000000; i++) {
 
             Article article = new Article();
-            String id = "" +(int) (Math.random() * 1000000);
+            String id = "" +(int) (Math.random()  *1000000);
             article.setId(id);
             article.setName("Article-" + i);
             article.setPrice(new BigDecimal(Math.random() * 1000));
@@ -43,8 +43,7 @@ public class SimpleProducer {
             producer.send(new ProducerRecord<String, String>("articles", id, createWrapper(article)));
 
         }
-        producer.send(new ProducerRecord<String, String>("articles", "ENDE", "ENDE"));
-        System.out.println("fertig " + i + " Nachrichten in " + (System.currentTimeMillis() - t1 + " ms"));
+        System.out.format("fertig nach %.3f s", ((System.currentTimeMillis() - t1)/1000.0));
 
         producer.close();
     }
